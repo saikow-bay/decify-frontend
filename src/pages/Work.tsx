@@ -47,9 +47,28 @@ const Work: React.FC = () => {
       style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
     >
       <Navigation isDark={false} />
+      {/* =========================
+    HERO — MOBILE (NUEVO)
+========================= */}
+<section className="md:hidden h-[100svh] w-full flex items-center justify-center px-6 text-center">
+  <h1
+    className="
+      uppercase font-normal tracking-tight
+      leading-[0.82]
+      text-[clamp(4.8rem,22vw,8rem)]
+    "
+    style={{ letterSpacing: '-0.04em' }}
+  >
+    YOU<br />
+    IMAGINE<br />
+    WE<br />
+    CODE
+  </h1>
+</section>
+
 
       {/* HERO — SE QUEDA TAL CUAL */}
-      <section className="min-h-screen w-full flex flex-col items-center justify-center px-6 md:px-24 text-center">
+      <section className="hidden md:flex min-h-screen w-full flex-col items-center justify-center px-6 md:px-24 text-center">
         <h1
           className="uppercase font-normal leading-[0.83] text-[clamp(3rem,14vw,15rem)] tracking-tight"
           style={{ letterSpacing: '-0.04em' }}
