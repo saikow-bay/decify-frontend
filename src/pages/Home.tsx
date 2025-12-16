@@ -9,7 +9,7 @@ const services = [
     image: '/images/uiux.jpg',
     title: 'DECIFY CORE',
     description:
-      'Premium website, basic catalog, cart + Supabase, real payments, fast delivery.',
+      'Professional, brand-aligned website design using your logo, fonts, colors and imagery, with a clear and intentional structure.',
   },
   {
     image: '/images/frontend.png',
@@ -22,6 +22,30 @@ const services = [
     title: 'DECIFY ONE',
     description:
       'Includes everything from PRO + full visual identity, campaign landing pages, blog/editorial section, email automations, cart recovery, advanced API integrations, premium optimization.',
+  },
+];
+
+// STUDIO / INSPIRATION MEETS FUNCTION — interactive blocks (no images)
+const studioItems = [
+  {
+    title: 'DESIGN',
+    description:
+      'WE DESIGN SYSTEMS THAT FEEL EXPENSIVE. TYPOGRAPHY, SPACING AND RHYTHM DONE WITH DISCIPLINE.',
+  },
+  {
+    title: 'LOGIC',
+    description:
+      'WE BUILD STRUCTURE BEFORE STYLE. NAVIGATION, FLOW AND INFORMATION ARCHITECTURE THAT MAKES SENSE.',
+  },
+  {
+    title: 'PRECISION',
+    description:
+      'MICRO-DETAILS MATTER: SPACING, TIMING, TRANSITIONS AND CONSISTENCY ACROSS EVERY BREAKPOINT.',
+  },
+  {
+    title: 'IMPACT',
+    description:
+      'PERFORMANCE, CLARITY AND LONGEVITY. SO YOUR PRODUCT DOESN’T JUST LOOK GOOD, IT LASTS.',
   },
 ];
 
@@ -51,6 +75,12 @@ const Home = () => {
     if (section) section.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Mobile: “hover” reemplazado por tap
+  const [activeService, setActiveService] = useState<number | null>(null);
+
+  // STUDIO: hover (desktop) + tap (mobile)
+  const [activeStudio, setActiveStudio] = useState<number | null>(null);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -59,15 +89,13 @@ const Home = () => {
       transition={{ duration: 0.4 }}
       className="bg-white text-black"
     >
-
       {/* NAVBAR */}
-      <Navigation currentPage={currentPage} onPageChange={handlePageChange} isDark={false} />
+      <Navigation isDark={false} />
 
       {/* ====================================================== */}
       {/* DESKTOP VERSION */}
       {/* ====================================================== */}
       <div className="hidden md:block">
-
         {/* ---------------------- HERO ---------------------- */}
         <section
           id="HOME"
@@ -97,7 +125,7 @@ const Home = () => {
                 className="text-4xl font-normal text-right"
                 style={{ letterSpacing: '-0.01em', maxWidth: '23ch' }}
               >
-               ANY IDEA, ANY MINDSET
+                ANY IDEA, ANY MINDSET
                 <br />
                 TO EXPERIENCE
               </h2>
@@ -108,6 +136,83 @@ const Home = () => {
           </div>
         </section>
 
+        {/* ✅ MOVED: SERVICES now right after HERO */}
+        {/* -------------------- SERVICES (DESKTOP) — UPDATED -------------------- */}
+        <section id="SERVICES" className="w-full h-screen grid grid-cols-3">
+          {services.map((service, idx) => (
+            <div
+              key={idx}
+              className="relative group cursor-pointer overflow-hidden h-screen"
+            >
+              {/* Image only on hover */}
+              <img
+                src={service.image}
+                alt={service.title}
+                className="
+                  absolute inset-0 w-full h-full object-cover object-center
+                  opacity-0 group-hover:opacity-100
+                  transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                  brightness-[0.6]
+                "
+                draggable={false}
+              />
+
+              {/* Soft wash only on hover */}
+              <div
+                className="
+                  absolute inset-0 bg-white
+                  opacity-0 group-hover:opacity-5
+                  transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                  z-[5]
+                "
+              />
+
+              {/* Content */}
+              <div
+                className="
+                  absolute inset-0 z-10 flex flex-col items-start justify-end p-8
+                  text-black group-hover:text-white
+                  transition-colors duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                "
+              >
+                <div className="flex flex-col justify-end h-[240px]">
+                  <h3
+                    className="
+                      uppercase font-normal mb-3
+                      transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                      text-3xl group-hover:text-2xl
+                    "
+                    style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
+                  >
+                    {service.title}
+                  </h3>
+
+                  <div
+                    className="
+                      overflow-hidden
+                      transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                      max-h-0 opacity-0 translate-y-2
+                      group-hover:max-h-48 group-hover:opacity-100 group-hover:translate-y-0
+                    "
+                  >
+                    <p
+                      className="font-light text-base"
+                      style={{
+                        fontFamily: 'var(--font-neue-haas-light)',
+                        maxWidth: 320,
+                        lineHeight: 1.25,
+                      }}
+                    >
+                      {service.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {/* ✅ MOVED DOWN: WHAT WE BUILD now after SERVICES */}
         {/* ------------------- WHAT WE BUILD ------------------- */}
         <section
           id="WORK"
@@ -133,75 +238,72 @@ const Home = () => {
               }}
             >
               DECIFY BUILDS MODERN, HIGH-END DIGITAL EXPERIENCES THAT COMBINE
-              ART, PERFORMANCE AND TECHNOLOGY — DELIVERED WITH OBSESSIVE DETAIL.
+              ART, PERFORMANCE AND TECHNOLOGY DELIVERED WITH OBSESSIVE DETAIL.
             </p>
           </div>
         </section>
 
-        {/* -------------------- SERVICES -------------------- */}
-        <section id="SERVICES" className="w-full grid grid-cols-3">
-          {services.map((service, idx) => (
-            <div
-              key={idx}
-              className="relative group cursor-pointer overflow-hidden h-[71.43vh]"
-            >
-              <img
-                src={service.image}
-                alt={service.title}
-                className="absolute inset-0 w-full h-full object-cover object-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 brightness-[0.6]"
-                draggable={false}
-              />
-
-              <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-5 transition-opacity duration-700 z-[5]" />
-
-              <div className="absolute inset-0 z-10 flex flex-col items-start justify-end p-8 transition-all duration-500 group-hover:text-white">
-                <div className="flex flex-col justify-end h-[200px]">
-                  <h3
-                    className="text-2xl font-normal uppercase mb-3 transition-colors duration-500"
-                    style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
-                  >
-                    {service.title}
-                  </h3>
-
-                  <p
-                    className="font-light text-base transition-colors duration-500"
-                    style={{
-                      fontFamily: 'var(--font-neue-haas-light)',
-                      maxWidth: 300,
-                      lineHeight: 1.25,
-                    }}
-                  >
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </section>
-
-        {/* ------------------ STATIC SECTION ------------------ */}
+        {/* ====================================================== */}
+        {/* STUDIO (DESKTOP) — RESTART: title never moves, item grows a bit on hover */}
+        {/* ====================================================== */}
         <section
           id="STUDIO"
-          className="w-full min-h-screen flex flex-col justify-start pt-24 px-24"
+          className="w-full flex flex-col px-0 overflow-hidden"
           style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
         >
-          <h2
-            className="text-[7.5rem] font-normal leading-[0.98] uppercase mb-4"
-            style={{ letterSpacing: '-0.04em' }}
-          >
-            INSPIRATION <br /> MEETS FUNCTION
-          </h2>
+          {studioItems.map((item, idx) => {
+            const active = activeStudio === idx;
 
-          <p
-            className="max-w-2xl text-2xl font-light uppercase mt-28"
-            style={{
-              fontFamily: 'var(--font-neue-haas-light)',
-              lineHeight: 1.2,
-            }}
-          >
-            We combine design, logic and precision to craft digital systems built
-            for longevity, clarity and impact.
-          </p>
+            return (
+              <div
+                key={item.title}
+                onMouseEnter={() => setActiveStudio(idx)}
+                onMouseLeave={() => setActiveStudio(null)}
+                className={[
+                  'relative w-full cursor-pointer select-none overflow-hidden',
+                  'bg-white hover:bg-neutral-200',
+                  'transition-[min-height,background-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
+                  active ? 'min-h-[46vh]' : 'min-h-[36vh]',
+                ].join(' ')}
+              >
+                {/* TITLE — perfectly centered, never moves */}
+                <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
+                  <div
+                    className="uppercase font-normal text-[clamp(2.5rem,8vw,7rem)] leading-[0.9]"
+                    style={{ letterSpacing: '-0.03em' }}
+                  >
+                    {item.title}
+                  </div>
+                </div>
+
+                {/* TEXT — anchored lower; when the block grows, it naturally drops */}
+                <div
+                  className={[
+                    'absolute left-0 right-0 bottom-[10%] mx-auto',
+                    'grid transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
+                    active
+                      ? 'grid-rows-[1fr] opacity-100'
+                      : 'grid-rows-[0fr] opacity-0',
+                  ].join(' ')}
+                >
+                  <div className="min-h-0 overflow-hidden">
+                    <p
+                      className="uppercase font-light mx-auto text-center"
+                      style={{
+                        fontFamily: 'var(--font-neue-haas-light)',
+                        lineHeight: 1.5,
+                        maxWidth: '72ch',
+                        fontSize: '1rem',
+                        opacity: 0.92,
+                      }}
+                    >
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </section>
 
         <WhatWeDoSection />
@@ -212,107 +314,263 @@ const Home = () => {
       {/* MOBILE VERSION */}
       {/* ====================================================== */}
       <div className="block md:hidden">
-
-        {/* ---------------------- HERO ---------------------- */}
         {/* ---------------------- HERO (MOBILE) ---------------------- */}
-<section
-  id="HOME"
-  className="w-full min-h-[110vh] px-6 flex flex-col justify-between py-20"
-  style={{
-    fontFamily: 'var(--font-neue-haas-normal)',
-    letterSpacing: '-0.03em',
-  }}
+        <section
+          id="HOME"
+          className="w-full min-h-[110vh] px-6 flex flex-col justify-between pt-16 pb-24"
+          style={{
+            fontFamily: 'var(--font-neue-haas-normal)',
+            letterSpacing: '-0.03em',
+          }}
+        >
+          <div className="pt-6">
+            <h1 className="text-[clamp(3.5rem,17vw,6rem)] font-normal leading-[1.02] uppercase">
+              WE
+              <br />
+              <span
+                className={`inline-block ${
+                  isFading ? 'opacity-0' : 'opacity-100'
+                } transition-opacity duration-500`}
+              >
+                {titles[currentTitle].toUpperCase()}
+              </span>
+              <br />
+              BIG
+            </h1>
+          </div>
+
+          <div className="pb-6">
+            <h2
+              className="text-[clamp(1.2rem,5.2vw,1.7rem)] font-normal uppercase"
+              style={{ letterSpacing: '-0.01em', maxWidth: '26ch' }}
+            >
+              ANY IDEA, ANY MINDSET
+              <br />
+              TO EXPERIENCE
+            </h2>
+
+            <span className="mt-6 block tracking-widest text-xs uppercase font-thin opacity-80">
+              code & brand studio
+            </span>
+          </div>
+        </section>
+
+        {/* ✅ MOVED: SERVICES now right after HERO (MOBILE) */}
+        {/* -------------------- SERVICES (MOBILE) — UPDATED -------------------- */}
+        <section id="SERVICES" className="px-6 pb-24 space-y-0">
+          {services.map((service, idx) => {
+            const open = activeService === idx;
+
+            return (
+              <button
+                key={idx}
+                type="button"
+                onClick={() =>
+                  setActiveService((prev) => (prev === idx ? null : idx))
+                }
+                className="block w-full text-left leading-none"
+                style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
+              >
+                <div className="relative overflow-hidden h-[52svh] w-screen left-1/2 -translate-x-1/2">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    draggable={false}
+                    className={`
+                      absolute inset-0 w-full h-full object-cover object-center brightness-[0.65]
+                      transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                      ${open ? 'opacity-100' : 'opacity-0'}
+                    `}
+                  />
+
+                  <div
+                    className={`
+                      absolute inset-0 bg-white
+                      transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                      ${open ? 'opacity-10' : 'opacity-0'}
+                    `}
+                  />
+
+                  <div
+                    className={`
+                      absolute inset-0 z-10 flex flex-col items-start justify-end p-6
+                      transition-colors duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                      ${open ? 'text-white' : 'text-black'}
+                    `}
+                  >
+                    <h3
+                      className={`
+                        uppercase mb-2
+                        transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                        ${open ? 'text-2xl' : 'text-[28px]'}
+                      `}
+                      style={{ letterSpacing: '-0.02em' }}
+                    >
+                      {service.title}
+                    </h3>
+
+                    <div
+                      className={`
+                        overflow-hidden
+                        transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
+                        ${
+                          open
+                            ? 'max-h-48 opacity-100 translate-y-0'
+                            : 'max-h-0 opacity-0 translate-y-2'
+                        }
+                      `}
+                    >
+                      <p
+                        className="font-light text-base"
+                        style={{
+                          fontFamily: 'var(--font-neue-haas-light)',
+                          maxWidth: 420,
+                          lineHeight: 1.25,
+                        }}
+                      >
+                        {service.description}
+                      </p>
+                    </div>
+
+                    <span className="mt-5 text-xs uppercase tracking-widest opacity-70">
+                      tap to {open ? 'close' : 'reveal'}
+                    </span>
+                  </div>
+                </div>
+              </button>
+            );
+          })}
+        </section>
+
+        {/* ------------------ WHAT WE BUILD (MOBILE) ------------------ */}
+        <section
+  id="WORK"
+  className="px-4 pt-6 pb-10 h-screen flex flex-col justify-between"
 >
+  {/* TITLE — más grande y arriba */}
+  <h2
+    className="uppercase leading-[0.95]"
+    style={{
+      fontSize: 'clamp(3.2rem, 12vw, 4.6rem)',
+      letterSpacing: '-0.04em',
+    }}
+  >
+    WHAT WE’RE
+    <br />
+    BUILDING
+  </h2>
 
-  {/* TEXT ABOVE */}
-  <div className="pt-10">
-    <h1 className="text-[clamp(3.5rem,17vw,6rem)] font-normal leading-[1.05] uppercase">
-      WE
-      <br />
-      <span
-        className={`inline-block ${
-          isFading ? 'opacity-0' : 'opacity-100'
-        } transition-opacity duration-500`}
-      >
-        {titles[currentTitle].toUpperCase()}
-      </span>
-      <br />
-      BIG
-    </h1>
-  </div>
-
-  {/* SUBTITLE BELOW */}
-  <div className="pb-12">
-    <p className="text-lg uppercase font-light opacity-90 tracking-wide text-left">
-      FROM VISION TO EXPERIENCE
-    </p>
-  </div>
-
+  {/* TEXT — más grande y hasta abajo */}
+  <p
+    className="uppercase font-light"
+    style={{
+      fontFamily: 'var(--font-neue-haas-light)',
+      fontSize: '1.05rem',
+      lineHeight: 1.35,
+      maxWidth: '34ch',
+    }}
+  >
+    DECIFY BUILDS MODERN, HIGH-END DIGITAL EXPERIENCES THAT COMBINE ART,
+    PERFORMANCE AND TECHNOLOGY DELIVERED WITH OBSESSIVE DETAIL.
+  </p>
 </section>
 
 
-        {/* ------------------ WHAT WE BUILD ------------------ */}
+        {/* ====================================================== */}
+        {/* STUDIO (MOBILE) */}
+        {/* ====================================================== */}
         <section
-          id="WORK"
-          className="px-6 py-20"
+          id="STUDIO"
+          className="min-h-screen px-0 py-24 flex items-center justify-center"
           style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
         >
-          <h2 className="text-[clamp(2.5rem,10vw,4rem)] leading-[1] uppercase mb-10">
-            WHAT WE’RE
-            <br />
-            BUILDING
-          </h2>
+          <div className="w-full">
+            <div className="flex flex-col gap-0 w-full">
+              {studioItems.map((item, idx) => {
+                const open = activeStudio === idx;
 
-          <p
-            className="text-base uppercase font-light opacity-90"
-            style={{ fontFamily: 'var(--font-neue-haas-light)' }}
-          >
-            DECIFY BUILDS HIGH-END DIGITAL EXPERIENCES THAT COMBINE ART,
-            PERFORMANCE AND TECHNOLOGY.
-          </p>
-        </section>
+                return (
+                  <button
+                    key={item.title}
+                    type="button"
+                    onClick={() =>
+                      setActiveStudio((prev) => (prev === idx ? null : idx))
+                    }
+                    className={[
+                      'w-full text-center select-none transition-colors duration-300',
+                      open ? 'bg-neutral-200' : 'bg-white',
+                    ].join(' ')}
+                    style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
+                  >
+                    <div className="relative px-7 h-[50vh] text-center">
+                      {/* TITLE — sube al abrir */}
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div
+                          className={`
+                            uppercase text-[clamp(2.5rem,8vw,7rem)] leading-[0.9]
+                            transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                            ${open ? '-translate-y-6' : 'translate-y-0'}
+                          `}
+                          style={{ letterSpacing: '-0.03em' }}
+                        >
+                          {item.title}
+                        </div>
+                      </div>
 
-        {/* -------------------- SERVICES -------------------- */}
-        <section id="SERVICES" className="px-6 space-y-10">
-          {services.map((service, idx) => (
-            <div key={idx} className="w-full">
-              <img
-                src={service.image}
-                className="w-full h-[45vh] object-cover rounded-md mb-4"
-              />
+                      {/* TAP LABEL — sube JUNTO con el título */}
+                      <div
+                        className={`
+                          absolute left-0 right-0 bottom-[22%]
+                          uppercase tracking-widest text-[11px]
+                          transition-transform transition-opacity duration-700
+                          ease-[cubic-bezier(0.22,1,0.36,1)]
+                          ${open ? '-translate-y-4 opacity-90' : 'translate-y-0 opacity-70'}
+                        `}
+                        style={{ fontFamily: 'var(--font-neue-haas-light)' }}
+                      >
+                        {open ? 'TAP TO HIDE' : 'TAP TO REVEAL'}
+                      </div>
 
-              <h3 className="text-2xl uppercase mb-2">{service.title}</h3>
-
-              <p
-                className="text-base font-light opacity-90"
-                style={{ fontFamily: 'var(--font-neue-haas-light)' }}
-              >
-                {service.description}
-              </p>
+                      {/* TEXT — aparece abajo, independiente */}
+                      <div className="absolute left-0 right-0 bottom-[6%] mx-auto">
+                        <div
+                          className={`
+                            grid transition-[grid-template-rows,opacity,transform]
+                            duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
+                            ${
+                              open
+                                ? 'grid-rows-[1fr] opacity-100 -translate-y-3'
+                                : 'grid-rows-[0fr] opacity-0 translate-y-2'
+                            }
+                          `}
+                        >
+                          <div className="min-h-0 overflow-hidden">
+                            <p
+                              className="uppercase font-light mx-auto"
+                              style={{
+                                fontFamily: 'var(--font-neue-haas-light)',
+                                lineHeight: 1.55,
+                                fontSize: '13px',
+                                maxWidth: '46ch',
+                                opacity: 0.92,
+                              }}
+                            >
+                              {item.description}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
-          ))}
+          </div>
         </section>
 
-        {/* ------------------ STATIC SECTION ------------------ */}
-        <section className="px-6 py-24">
-          <h2 className="text-[clamp(2.5rem,10vw,4rem)] leading-[1] uppercase mb-10">
-            INSPIRATION
-            <br />
-            MEETS FUNCTION
-          </h2>
-
-          <p
-            className="text-base uppercase font-light opacity-90"
-            style={{ fontFamily: 'var(--font-neue-haas-light)' }}
-          >
-            We combine design, logic and precision to craft systems built
-            for clarity and impact.
-          </p>
-        </section>
-
+        <WhatWeDoSection />
         <Footer isDark={false} />
       </div>
-
     </motion.div>
   );
 };
