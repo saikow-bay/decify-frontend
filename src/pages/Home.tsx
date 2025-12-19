@@ -348,7 +348,7 @@ const opens = [open0, open1, open2];
               <div key={idx} className="relative h-[100dvh]">
                 <div
   ref={trigRef}
-  className="absolute top-[5 0%] left-0 right-0 h-[2px] w-full opacity-0 pointer-events-none"
+  className="absolute top-[50%] left-0 right-0 h-[2px] w-full opacity-0 pointer-events-none"
 />
 
                 <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
