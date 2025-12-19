@@ -448,7 +448,7 @@ const Home = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: open ? 1 : 0 }}
                     transition={{
-                      duration: 0.85,
+                      duration: 1.4,
                       ease: [0.22, 1, 0.36, 1],
                     }}
                   />
@@ -459,7 +459,7 @@ const Home = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: open ? 0.1 : 0 }}
                     transition={{
-                      duration: 0.85,
+                      duration: 1.6,
                       ease: [0.22, 1, 0.36, 1],
                     }}
                   />
@@ -479,7 +479,7 @@ const Home = () => {
                         color: open ? '#fff' : '#000',
                       }}
                       transition={{
-                        duration: 0.85,
+                        duration: 1.1,
                         ease: [0.22, 1, 0.36, 1],
                       }}
                     >
@@ -495,7 +495,7 @@ const Home = () => {
                         y: open ? 0 : 6,
                       }}
                       transition={{
-                        duration: 0.85,
+                        duration: 1.1,
                         ease: [0.22, 1, 0.36, 1],
                       }}
                     >
@@ -522,7 +522,7 @@ const Home = () => {
                         color: open ? '#fff' : '#000',
                       }}
                       transition={{
-                        duration: 0.85,
+                        duration: 1.1,
                         ease: [0.22, 1, 0.36, 1],
                       }}
                     >
