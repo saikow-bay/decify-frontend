@@ -13,7 +13,7 @@ const App: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div id="app" className="min-h-[100svh] overflow-x-hidden">
+    <div id="app" className="h-[100dvh] overflow-y-auto overflow-x-hidden">
       <Navigation isDark={false} />
       <main>
         <ScrollToTop /> {/* 👈 Scroll arriba al cambiar de ruta */}
