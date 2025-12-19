@@ -312,12 +312,10 @@ const Home = () => {
 
       {/* ====================================================== */}
       {/* MOBILE VERSION */}
-      {/* ====================================================== */}
       <div className="block md:hidden">
-        {/* ---------------------- HERO (MOBILE) ---------------------- */}
         <section
           id="HOME"
-          className="w-full min-h-[110vh] px-6 flex flex-col justify-between pt-16 pb-24"
+          className="w-full h-[100svh] px-6 flex flex-col justify-between pt-24 pb-16"
           style={{
             fontFamily: 'var(--font-neue-haas-normal)',
             letterSpacing: '-0.03em',
@@ -445,7 +443,7 @@ const Home = () => {
         {/* ------------------ WHAT WE BUILD (MOBILE) ------------------ */}
         <section
   id="WORK"
-  className="px-4 pt-6 pb-10 h-screen flex flex-col justify-between"
+  className="px-4 pt-6 pb-10 h-[100svh] flex flex-col justify-between"
 >
   {/* TITLE — más grande y arriba */}
   <h2
@@ -481,7 +479,7 @@ const Home = () => {
         {/* ====================================================== */}
         <section
           id="STUDIO"
-          className="min-h-screen px-0 py-24 flex items-center justify-center"
+          className="min-h-[100svh] px-0 py-24 flex items-center justify-center"
           style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
         >
           <div className="w-full">
@@ -502,7 +500,7 @@ const Home = () => {
                     ].join(' ')}
                     style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
                   >
-                    <div className="relative px-7 h-[50vh] text-center">
+                    <div className="relative px-7 h-[50svh] text-center">
                       {/* TITLE — sube al abrir */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div

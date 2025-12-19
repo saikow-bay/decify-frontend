@@ -57,3 +57,16 @@ html, body {
   font-family: 'Neue Haas Display', sans-serif;
   scroll-behavior: smooth;
 }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+
+  /* ❌ elimina el rebote / overscroll */
+  overscroll-behavior: none;
+
+  /* evita scroll horizontal fantasma */
+  overflow-x: hidden;
+}

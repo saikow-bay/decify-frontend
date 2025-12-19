@@ -13,9 +13,8 @@ const App: React.FC = () => {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen bg-white font-inter">
+    <div id="app" className="min-h-[100svh] overflow-x-hidden">
       <Navigation isDark={false} />
-
       <main>
         <ScrollToTop /> {/* 👈 Scroll arriba al cambiar de ruta */}
 

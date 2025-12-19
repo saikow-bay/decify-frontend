@@ -12,9 +12,10 @@ const Studio = () => {
       transition={{ duration: 0.4 }}
     >
       <div
-        className="bg-white text-black w-full min-h-screen"
-        style={{ fontFamily: 'var(--font-neue-haas-light)' }}
-      >
+  className="bg-white text-black w-full min-h-[100svh] md:min-h-screen"
+  style={{ fontFamily: 'var(--font-neue-haas-light)' }}
+>
+
         <Navigation isDark={false} />
 
         {/* ========================= */}

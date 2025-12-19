@@ -23,7 +23,7 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
 
   return (
     <section
-      className={`w-full min-h-screen px-6 md:px-24 py-32 font-sans transition-colors duration-700
+      className={`w-full min-h-[100svh] md:min-h-screen px-6 md:px-24 py-32 font-sans transition-colors duration-700
         ${isDark ? 'bg-black text-white' : 'bg-white text-black'}
       `}
     >
