@@ -49,6 +49,93 @@ const studioItems = [
   },
 ];
 
+// ===============================
+// RANDOM WORD REVEAL (STUDIO)
+// ===============================
+function shuffle<T>(arr: T[]) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function RandomWordReveal({
+  text,
+  active,
+  durationMs = 1000,
+  className = '',
+  style = {},
+}: {
+  text: string;
+  active: boolean;
+  durationMs?: number;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  const words = React.useMemo(() => text.trim().split(/\s+/), [text]);
+
+  // Random order (re-randomize each time it becomes active)
+  const order = React.useMemo(() => {
+    const idxs = words.map((_, i) => i);
+    return shuffle(idxs);
+  }, [active, words.length]);
+
+  const [revealedCount, setRevealedCount] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!active) {
+      setRevealedCount(0);
+      return;
+    }
+
+    setRevealedCount(0);
+
+    const total = words.length || 1;
+    const step = Math.max(25, Math.floor(durationMs / total)); // fast but readable
+
+    const t = window.setInterval(() => {
+      setRevealedCount((c) => {
+        if (c >= total) {
+          window.clearInterval(t);
+          return total;
+        }
+        return c + 1;
+      });
+    }, step);
+
+    return () => window.clearInterval(t);
+  }, [active, durationMs, words.length]);
+
+  const revealedSet = React.useMemo(() => {
+    const set = new Set<number>();
+    for (let k = 0; k < revealedCount; k++) {
+      const idx = order[k];
+      if (idx !== undefined) set.add(idx);
+    }
+    return set;
+  }, [order, revealedCount]);
+
+  return (
+    <p className={className} style={style}>
+      {words.map((w, i) => (
+        <span
+          key={`${w}-${i}`}
+          className="inline-block transition-opacity duration-150"
+          style={{
+            opacity: active && revealedSet.has(i) ? 1 : 0,
+            marginRight: '0.33em',
+            willChange: 'opacity',
+          }}
+        >
+          {w}
+        </span>
+      ))}
+    </p>
+  );
+}
+
 const Home = () => {
   const [currentTitle, setCurrentTitle] = useState(0);
   const [isFading, setIsFading] = useState(false);
@@ -83,16 +170,15 @@ const Home = () => {
 
   // ✅ SERVICES (MOBILE) — Scroll-to-reveal (progressive, stays revealed)
   const trig0 = useRef<HTMLDivElement | null>(null);
-const trig1 = useRef<HTMLDivElement | null>(null);
-const trig2 = useRef<HTMLDivElement | null>(null);
+  const trig1 = useRef<HTMLDivElement | null>(null);
+  const trig2 = useRef<HTMLDivElement | null>(null);
 
-const open0 = useInView(trig0, { amount: 0.6, once: false });
-const open1 = useInView(trig1, { amount: 0.6, once: false });
-const open2 = useInView(trig2, { amount: 0.6, once: false });
+  const open0 = useInView(trig0, { amount: 0.6, once: false });
+  const open1 = useInView(trig1, { amount: 0.6, once: false });
+  const open2 = useInView(trig2, { amount: 0.6, once: false });
 
-const trigRefs = [trig0, trig1, trig2];
-const opens = [open0, open1, open2];
-
+  const trigRefs = [trig0, trig1, trig2];
+  const opens = [open0, open1, open2];
 
   return (
     <motion.div
@@ -286,7 +372,10 @@ const opens = [open0, open1, open2];
                   ].join(' ')}
                 >
                   <div className="min-h-0 overflow-hidden">
-                    <p
+                    <RandomWordReveal
+                      text={item.description}
+                      active={active}
+                      durationMs={1400}
                       className="uppercase font-light mx-auto text-center"
                       style={{
                         fontFamily: 'var(--font-neue-haas-light)',
@@ -295,9 +384,7 @@ const opens = [open0, open1, open2];
                         fontSize: '1rem',
                         opacity: 0.92,
                       }}
-                    >
-                      {item.description}
-                    </p>
+                    />
                   </div>
                 </div>
               </div>
@@ -342,14 +429,14 @@ const opens = [open0, open1, open2];
         <section id="SERVICES" className="w-full">
           {services.map((service, idx) => {
             const open = opens[idx];
-            const trigRef = trigRefs[idx];            
+            const trigRef = trigRefs[idx];
 
             return (
               <div key={idx} className="relative h-[100dvh]">
                 <div
-  ref={trigRef}
-  className="absolute top-[50%] left-0 right-0 h-[2px] w-full opacity-0 pointer-events-none"
-/>
+                  ref={trigRef}
+                  className="absolute top-[50%] left-0 right-0 h-[2px] w-full opacity-0 pointer-events-none"
+                />
 
                 <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
                   {/* Image reveal */}
@@ -536,21 +623,24 @@ const opens = [open0, open1, open2];
                         {open ? 'TAP TO HIDE' : 'TAP TO REVEAL'}
                       </div>
 
-                      {/* TEXT — aparece abajo, independiente */}
+                      {/* TEXT — random word reveal (no bottom-to-top movement) */}
                       <div className="absolute left-0 right-0 bottom-[6%] mx-auto">
                         <div
                           className={`
-                            grid transition-[grid-template-rows,opacity,transform]
+                            grid transition-[grid-template-rows,opacity]
                             duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
                             ${
                               open
-                                ? 'grid-rows-[1fr] opacity-100 -translate-y-3'
-                                : 'grid-rows-[0fr] opacity-0 translate-y-2'
+                                ? 'grid-rows-[1fr] opacity-100'
+                                : 'grid-rows-[0fr] opacity-0'
                             }
                           `}
                         >
                           <div className="min-h-0 overflow-hidden">
-                            <p
+                            <RandomWordReveal
+                              text={item.description}
+                              active={open}
+                              durationMs={1400}
                               className="uppercase font-light mx-auto"
                               style={{
                                 fontFamily: 'var(--font-neue-haas-light)',
@@ -559,9 +649,7 @@ const opens = [open0, open1, open2];
                                 maxWidth: '46ch',
                                 opacity: 0.92,
                               }}
-                            >
-                              {item.description}
-                            </p>
+                            />
                           </div>
                         </div>
                       </div>
