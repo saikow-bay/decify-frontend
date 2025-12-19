@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import WhatWeDoSection from './WhatWeDoSection';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
-import { motion } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 const services = [
   {
@@ -81,6 +81,19 @@ const Home = () => {
   // STUDIO: hover (desktop) + tap (mobile)
   const [activeStudio, setActiveStudio] = useState<number | null>(null);
 
+  // ✅ SERVICES (MOBILE) — Scroll-to-reveal (progressive, stays revealed)
+  const trig0 = useRef<HTMLDivElement | null>(null);
+const trig1 = useRef<HTMLDivElement | null>(null);
+const trig2 = useRef<HTMLDivElement | null>(null);
+
+const open0 = useInView(trig0, { amount: 0.6, once: false });
+const open1 = useInView(trig1, { amount: 0.6, once: false });
+const open2 = useInView(trig2, { amount: 0.6, once: false });
+
+const trigRefs = [trig0, trig1, trig2];
+const opens = [open0, open1, open2];
+
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -98,30 +111,29 @@ const Home = () => {
       <div className="hidden md:block">
         {/* ---------------------- HERO ---------------------- */}
         <section
-  id="HOME"
-  className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden px-6 md:px-24"
-  style={{
-    fontFamily: 'var(--font-neue-haas-normal)',
-    letterSpacing: '-0.03em',
-  }}
->
-  <div className="w-full flex flex-col items-center justify-center text-center">
-  <h1 className="uppercase text-[clamp(7.5rem,11vw,11.5rem)] font-normal leading-[0.98]">
-      <span className="block mb-4">WE</span>
+          id="HOME"
+          className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden px-6 md:px-24"
+          style={{
+            fontFamily: 'var(--font-neue-haas-normal)',
+            letterSpacing: '-0.03em',
+          }}
+        >
+          <div className="w-full flex flex-col items-center justify-center text-center">
+            <h1 className="uppercase text-[clamp(7.5rem,11vw,11.5rem)] font-normal leading-[0.98]">
+              <span className="block mb-4">WE</span>
 
-      <span
-        className={`inline-block ${
-          isFading ? 'opacity-0' : 'opacity-100'
-        } transition-opacity duration-500`}
-      >
-        {titles[currentTitle].toUpperCase()}
-      </span>
+              <span
+                className={`inline-block ${
+                  isFading ? 'opacity-0' : 'opacity-100'
+                } transition-opacity duration-500`}
+              >
+                {titles[currentTitle].toUpperCase()}
+              </span>
 
-      <span className="block mt-4">BIG</span>
-    </h1>
-  </div>
-</section>
-
+              <span className="block mt-4">BIG</span>
+            </h1>
+          </div>
+        </section>
 
         {/* ✅ MOVED: SERVICES now right after HERO */}
         {/* -------------------- SERVICES (DESKTOP) — UPDATED -------------------- */}
@@ -300,153 +312,174 @@ const Home = () => {
       {/* ====================================================== */}
       {/* MOBILE VERSION */}
       <div className="block md:hidden">
-      <section
-  id="HOME"
-  className="w-full h-[100dvh] px-6 flex items-center justify-center"
-  style={{
-    fontFamily: 'var(--font-neue-haas-normal)',
-    letterSpacing: '-0.03em',
-  }}
->
-  <div className="w-full text-center">
-  <h1 className="uppercase text-[clamp(5.2rem,20vw,7.8rem)] font-normal leading-[1.05]">
-
-      WE
-      <br />
-      <span
-        className={`inline-block ${
-          isFading ? 'opacity-0' : 'opacity-100'
-        } transition-opacity duration-500`}
-      >
-        {titles[currentTitle].toUpperCase()}
-      </span>
-      <br />
-      BIG
-    </h1>
-  </div>
-</section>
-
+        <section
+          id="HOME"
+          className="w-full h-[100dvh] px-6 flex items-center justify-center"
+          style={{
+            fontFamily: 'var(--font-neue-haas-normal)',
+            letterSpacing: '-0.03em',
+          }}
+        >
+          <div className="w-full text-center">
+            <h1 className="uppercase text-[clamp(5.2rem,20vw,7.8rem)] font-normal leading-[1.05]">
+              WE
+              <br />
+              <span
+                className={`inline-block ${
+                  isFading ? 'opacity-0' : 'opacity-100'
+                } transition-opacity duration-500`}
+              >
+                {titles[currentTitle].toUpperCase()}
+              </span>
+              <br />
+              BIG
+            </h1>
+          </div>
+        </section>
 
         {/* ✅ MOVED: SERVICES now right after HERO (MOBILE) */}
-        {/* -------------------- SERVICES (MOBILE) — UPDATED -------------------- */}
-        <section id="SERVICES" className="px-6 pb-24 space-y-0">
+        {/* -------------------- SERVICES (MOBILE) — SCROLL REVEAL -------------------- */}
+        <section id="SERVICES" className="w-full">
           {services.map((service, idx) => {
-            const open = activeService === idx;
+            const open = opens[idx];
+            const trigRef = trigRefs[idx];            
 
             return (
-              <button
-                key={idx}
-                type="button"
-                onClick={() =>
-                  setActiveService((prev) => (prev === idx ? null : idx))
-                }
-                className="block w-full text-left leading-none"
-                style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
-              >
-                <div className="relative overflow-hidden h-[52svh] w-screen left-1/2 -translate-x-1/2">
-                  <img
+              <div key={idx} className="relative h-[100dvh]">
+                <div
+  ref={trigRef}
+  className="absolute top-[5 0%] left-0 right-0 h-[2px] w-full opacity-0 pointer-events-none"
+/>
+
+                <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
+                  {/* Image reveal */}
+                  <motion.img
                     src={service.image}
                     alt={service.title}
                     draggable={false}
-                    className={`
-                      absolute inset-0 w-full h-full object-cover object-center brightness-[0.65]
-                      transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
-                      ${open ? 'opacity-100' : 'opacity-0'}
-                    `}
+                    className="absolute inset-0 w-full h-full object-cover object-center brightness-[0.65]"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: open ? 1 : 0 }}
+                    transition={{
+                      duration: 0.85,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                   />
 
-                  <div
-                    className={`
-                      absolute inset-0 bg-white
-                      transition-opacity duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
-                      ${open ? 'opacity-10' : 'opacity-0'}
-                    `}
+                  {/* Soft wash */}
+                  <motion.div
+                    className="absolute inset-0 bg-white"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: open ? 0.1 : 0 }}
+                    transition={{
+                      duration: 0.85,
+                      ease: [0.22, 1, 0.36, 1],
+                    }}
                   />
 
-                  <div
-                    className={`
-                      absolute inset-0 z-10 flex flex-col items-start justify-end p-6
-                      transition-colors duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
-                      ${open ? 'text-white' : 'text-black'}
-                    `}
-                  >
-                    <h3
-                      className={`
-                        uppercase mb-2
-                        transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
-                        ${open ? 'text-2xl' : 'text-[28px]'}
-                      `}
-                      style={{ letterSpacing: '-0.02em' }}
+                  {/* Content (no reflow = no “up then down”) */}
+                  <div className="absolute inset-0 z-10 flex flex-col justify-end px-6 pb-10">
+                    <motion.h3
+                      className="uppercase text-[28px] font-normal"
+                      style={{
+                        letterSpacing: '-0.02em',
+                        fontFamily: 'var(--font-neue-haas-normal)',
+                      }}
+                      initial={{ y: 10, opacity: 0.9, color: '#000' }}
+                      animate={{
+                        y: open ? -8 : 10,
+                        opacity: 1,
+                        color: open ? '#fff' : '#000',
+                      }}
+                      transition={{
+                        duration: 0.85,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                     >
                       {service.title}
-                    </h3>
+                    </motion.h3>
 
-                    <div
-                      className={`
-                        overflow-hidden
-                        transition-all duration-1000 ease-[cubic-bezier(0.22,1,0.36,1)]
-                        ${
-                          open
-                            ? 'max-h-48 opacity-100 translate-y-0'
-                            : 'max-h-0 opacity-0 translate-y-2'
-                        }
-                      `}
+                    <motion.div
+                      className="overflow-hidden"
+                      initial={{ height: 0, opacity: 0, y: 6 }}
+                      animate={{
+                        height: open ? 'auto' : 0,
+                        opacity: open ? 1 : 0,
+                        y: open ? 0 : 6,
+                      }}
+                      transition={{
+                        duration: 0.85,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
                     >
                       <p
-                        className="font-light text-base"
+                        className="uppercase font-light text-base mt-3"
                         style={{
                           fontFamily: 'var(--font-neue-haas-light)',
-                          maxWidth: 420,
                           lineHeight: 1.25,
+                          maxWidth: 420,
+                          color: '#fff',
+                          opacity: 0.92,
                         }}
                       >
                         {service.description}
                       </p>
-                    </div>
+                    </motion.div>
 
-                    <span className="mt-5 text-xs uppercase tracking-widest opacity-70">
-                      tap to {open ? 'close' : 'reveal'}
-                    </span>
+                    <motion.div
+                      className="mt-6 text-xs uppercase tracking-widest"
+                      style={{ fontFamily: 'var(--font-neue-haas-light)' }}
+                      initial={{ opacity: 0.55, color: '#000' }}
+                      animate={{
+                        opacity: open ? 0.75 : 0.55,
+                        color: open ? '#fff' : '#000',
+                      }}
+                      transition={{
+                        duration: 0.85,
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
+                      SCROLL
+                    </motion.div>
                   </div>
                 </div>
-              </button>
+              </div>
             );
           })}
         </section>
 
         {/* ------------------ WHAT WE BUILD (MOBILE) ------------------ */}
         <section
-  id="WORK"
-  className="px-4 pt-6 pb-10 h-[100svh] flex flex-col justify-between"
->
-  {/* TITLE — más grande y arriba */}
-  <h2
-    className="uppercase leading-[0.95]"
-    style={{
-      fontSize: 'clamp(3.2rem, 12vw, 4.6rem)',
-      letterSpacing: '-0.04em',
-    }}
-  >
-    WHAT WE’RE
-    <br />
-    BUILDING
-  </h2>
+          id="WORK"
+          className="px-4 pt-6 pb-10 h-[100svh] flex flex-col justify-between"
+        >
+          {/* TITLE — más grande y arriba */}
+          <h2
+            className="uppercase leading-[0.95]"
+            style={{
+              fontSize: 'clamp(3.2rem, 12vw, 4.6rem)',
+              letterSpacing: '-0.04em',
+            }}
+          >
+            WHAT WE’RE
+            <br />
+            BUILDING
+          </h2>
 
-  {/* TEXT — más grande y hasta abajo */}
-  <p
-    className="uppercase font-light"
-    style={{
-      fontFamily: 'var(--font-neue-haas-light)',
-      fontSize: '1.05rem',
-      lineHeight: 1.35,
-      maxWidth: '34ch',
-    }}
-  >
-    DECIFY BUILDS MODERN, HIGH-END DIGITAL EXPERIENCES THAT COMBINE ART,
-    PERFORMANCE AND TECHNOLOGY DELIVERED WITH OBSESSIVE DETAIL.
-  </p>
-</section>
-
+          {/* TEXT — más grande y hasta abajo */}
+          <p
+            className="uppercase font-light"
+            style={{
+              fontFamily: 'var(--font-neue-haas-light)',
+              fontSize: '1.05rem',
+              lineHeight: 1.35,
+              maxWidth: '34ch',
+            }}
+          >
+            DECIFY BUILDS MODERN, HIGH-END DIGITAL EXPERIENCES THAT COMBINE ART,
+            PERFORMANCE AND TECHNOLOGY DELIVERED WITH OBSESSIVE DETAIL.
+          </p>
+        </section>
 
         {/* ====================================================== */}
         {/* STUDIO (MOBILE) */}
