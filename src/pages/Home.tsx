@@ -98,43 +98,30 @@ const Home = () => {
       <div className="hidden md:block">
         {/* ---------------------- HERO ---------------------- */}
         <section
-          id="HOME"
-          className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden px-24 pt-24"
-          style={{
-            fontFamily: 'var(--font-neue-haas-normal)',
-            letterSpacing: '-0.03em',
-          }}
-        >
-          <div className="flex flex-row items-start justify-between w-full">
-            <div className="flex-1 flex flex-col justify-start">
-              <h1 className="text-[7rem] font-normal leading-[1.05]">
-                <span className="block mb-4">WE</span>
-                <span
-                  className={`inline-block ${
-                    isFading ? 'opacity-0' : 'opacity-100'
-                  } transition-opacity duration-500`}
-                >
-                  {titles[currentTitle].toUpperCase()}
-                </span>
-                <span className="block mt-4">BIG</span>
-              </h1>
-            </div>
+  id="HOME"
+  className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden px-6 md:px-24"
+  style={{
+    fontFamily: 'var(--font-neue-haas-normal)',
+    letterSpacing: '-0.03em',
+  }}
+>
+  <div className="w-full flex flex-col items-center justify-center text-center">
+  <h1 className="uppercase text-[clamp(7.5rem,11vw,11.5rem)] font-normal leading-[0.98]">
+      <span className="block mb-4">WE</span>
 
-            <div className="flex-1 flex flex-col justify-end items-end">
-              <h2
-                className="text-4xl font-normal text-right"
-                style={{ letterSpacing: '-0.01em', maxWidth: '23ch' }}
-              >
-                ANY IDEA, ANY MINDSET
-                <br />
-                TO EXPERIENCE
-              </h2>
-              <span className="mt-8 tracking-widest text-sm uppercase font-thin">
-                code & brand studio
-              </span>
-            </div>
-          </div>
-        </section>
+      <span
+        className={`inline-block ${
+          isFading ? 'opacity-0' : 'opacity-100'
+        } transition-opacity duration-500`}
+      >
+        {titles[currentTitle].toUpperCase()}
+      </span>
+
+      <span className="block mt-4">BIG</span>
+    </h1>
+  </div>
+</section>
+
 
         {/* ✅ MOVED: SERVICES now right after HERO */}
         {/* -------------------- SERVICES (DESKTOP) — UPDATED -------------------- */}
@@ -313,45 +300,32 @@ const Home = () => {
       {/* ====================================================== */}
       {/* MOBILE VERSION */}
       <div className="block md:hidden">
-        <section
-          id="HOME"
-          className="w-full h-[100svh] px-6 flex flex-col justify-between pt-24 pb-16"
-          style={{
-            fontFamily: 'var(--font-neue-haas-normal)',
-            letterSpacing: '-0.03em',
-          }}
-        >
-          <div className="pt-6">
-            <h1 className="text-[clamp(3.5rem,17vw,6rem)] font-normal leading-[1.02] uppercase">
-              WE
-              <br />
-              <span
-                className={`inline-block ${
-                  isFading ? 'opacity-0' : 'opacity-100'
-                } transition-opacity duration-500`}
-              >
-                {titles[currentTitle].toUpperCase()}
-              </span>
-              <br />
-              BIG
-            </h1>
-          </div>
+      <section
+  id="HOME"
+  className="w-full h-[100dvh] px-6 flex items-center justify-center"
+  style={{
+    fontFamily: 'var(--font-neue-haas-normal)',
+    letterSpacing: '-0.03em',
+  }}
+>
+  <div className="w-full text-center">
+  <h1 className="uppercase text-[clamp(5.2rem,20vw,7.8rem)] font-normal leading-[1.05]">
 
-          <div className="pb-6">
-            <h2
-              className="text-[clamp(1.2rem,5.2vw,1.7rem)] font-normal uppercase"
-              style={{ letterSpacing: '-0.01em', maxWidth: '26ch' }}
-            >
-              ANY IDEA, ANY MINDSET
-              <br />
-              TO EXPERIENCE
-            </h2>
+      WE
+      <br />
+      <span
+        className={`inline-block ${
+          isFading ? 'opacity-0' : 'opacity-100'
+        } transition-opacity duration-500`}
+      >
+        {titles[currentTitle].toUpperCase()}
+      </span>
+      <br />
+      BIG
+    </h1>
+  </div>
+</section>
 
-            <span className="mt-6 block tracking-widest text-xs uppercase font-thin opacity-80">
-              code & brand studio
-            </span>
-          </div>
-        </section>
 
         {/* ✅ MOVED: SERVICES now right after HERO (MOBILE) */}
         {/* -------------------- SERVICES (MOBILE) — UPDATED -------------------- */}
