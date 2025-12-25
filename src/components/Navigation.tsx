@@ -57,16 +57,14 @@ const Navigation: React.FC<NavigationProps> = ({ isDark }) => {
           ========================= */}
       <header className="hidden md:flex fixed top-0 left-0 w-full z-50 items-center justify-between px-8 py-5 select-none bg-transparent transition-colors duration-500">
         {/* DECIFY a la izquierda */}
-        <Link
-          to="/"
-          className={`${textColor} text-base font-normal transition hover:opacity-70`}
-          style={{
-            fontFamily: 'Neue Haas Display, sans-serif',
-            letterSpacing: '-0.05em',
-          }}
-        >
-          DECIFY
-        </Link>
+        <Link to="/" className="transition hover:opacity-70">
+  <img
+    src="/images/LOGOnobackground.png"
+    alt="Decify logo"
+    className="h-6 w-auto"
+  />
+</Link>
+
 
         {/* Menú central */}
         <nav className="flex-1 flex justify-center">
@@ -107,16 +105,17 @@ const Navigation: React.FC<NavigationProps> = ({ isDark }) => {
       <header className="md:hidden fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-5 select-none bg-transparent transition-colors duration-500">
         {/* DECIFY (logo) */}
         <Link
-          to="/"
-          onClick={() => setIsMenuOpen(false)}
-          className={`${textColor} text-base font-normal transition hover:opacity-70`}
-          style={{
-            fontFamily: 'Neue Haas Display, sans-serif',
-            letterSpacing: '-0.05em',
-          }}
-        >
-          DECIFY
-        </Link>
+  to="/"
+  onClick={() => setIsMenuOpen(false)}
+  className="transition hover:opacity-70"
+>
+  <img
+    src="/images/LOGOnobackground.png"
+    alt="Decify logo"
+    className="h- w-auto"
+  />
+</Link>
+
 
         {/* MENU */}
         <button

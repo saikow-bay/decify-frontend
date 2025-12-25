@@ -25,27 +25,27 @@ const services = [
   },
 ];
 
-// STUDIO / INSPIRATION MEETS FUNCTION — interactive blocks (no images)
+// STUDIO (longer text)
 const studioItems = [
   {
     title: 'DESIGN',
     description:
-      'WE DESIGN SYSTEMS THAT FEEL EXPENSIVE. TYPOGRAPHY, SPACING AND RHYTHM DONE WITH DISCIPLINE.',
+      'WE DESIGN SYSTEMS, NOT SCREENS. TYPOGRAPHY, SPACING AND RHYTHM ARE TREATED LIKE ARCHITECTURE. EVERY BLOCK HAS PURPOSE, EVERY LINE HAS WEIGHT, AND EVERY DETAIL SUPPORTS THE BRAND — SO IT FEELS EXPENSIVE WITHOUT TRYING.',
   },
   {
     title: 'LOGIC',
     description:
-      'WE BUILD STRUCTURE BEFORE STYLE. NAVIGATION, FLOW AND INFORMATION ARCHITECTURE THAT MAKES SENSE.',
+      'WE BUILD STRUCTURE BEFORE STYLE. NAVIGATION, FLOW AND INFORMATION ARCHITECTURE ARE PLANNED LIKE A PRODUCT, NOT A POSTER. THE RESULT IS CLARITY: USERS KNOW WHERE THEY ARE, WHAT TO DO NEXT, AND WHY IT MATTERS.',
   },
   {
     title: 'PRECISION',
     description:
-      'MICRO-DETAILS MATTER: SPACING, TIMING, TRANSITIONS AND CONSISTENCY ACROSS EVERY BREAKPOINT.',
+      'MICRO-DETAILS ARE NOT OPTIONAL: SPACING, TIMING, TYPE SCALE, ALIGNMENT, AND CONSISTENCY ACROSS BREAKPOINTS. WE TUNE THE EXPERIENCE UNTIL IT FEELS QUIETLY PERFECT — THE KIND OF POLISH YOU NOTICE WITHOUT REALIZING WHY.',
   },
   {
     title: 'IMPACT',
     description:
-      'PERFORMANCE, CLARITY AND LONGEVITY. SO YOUR PRODUCT DOESN’T JUST LOOK GOOD, IT LASTS.',
+      'PERFORMANCE, CLARITY AND LONGEVITY. WE OPTIMIZE FOR SPEED, ACCESSIBILITY AND REAL-WORLD USAGE. SO THE PRODUCT DOESN’T JUST LOOK GOOD TODAY — IT HOLDS UP UNDER TRAFFIC, CONTENT CHANGES, AND GROWTH TOMORROW.',
   },
 ];
 
@@ -93,7 +93,7 @@ function RandomWordReveal({
     setRevealedCount(0);
 
     const total = words.length || 1;
-    const step = Math.max(25, Math.floor(durationMs / total)); // fast but readable
+    const step = Math.max(22, Math.floor(durationMs / total));
 
     const t = window.setInterval(() => {
       setRevealedCount((c) => {
@@ -154,21 +154,10 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const [currentPage, setCurrentPage] = useState('HOME');
-
-  const handlePageChange = (page: string) => {
-    setCurrentPage(page);
-    const section = document.getElementById(page);
-    if (section) section.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  // Mobile: “hover” reemplazado por tap
-  const [activeService, setActiveService] = useState<number | null>(null);
-
-  // STUDIO: hover (desktop) + tap (mobile)
+  // STUDIO state
   const [activeStudio, setActiveStudio] = useState<number | null>(null);
 
-  // ✅ SERVICES (MOBILE) — Scroll-to-reveal (progressive, stays revealed)
+  // ✅ SERVICES (MOBILE) — Scroll-to-reveal
   const trig0 = useRef<HTMLDivElement | null>(null);
   const trig1 = useRef<HTMLDivElement | null>(null);
   const trig2 = useRef<HTMLDivElement | null>(null);
@@ -188,7 +177,6 @@ const Home = () => {
       transition={{ duration: 0.4 }}
       className="bg-white text-black"
     >
-      {/* NAVBAR */}
       <Navigation isDark={false} />
 
       {/* ====================================================== */}
@@ -221,15 +209,13 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ✅ MOVED: SERVICES now right after HERO */}
-        {/* -------------------- SERVICES (DESKTOP) — UPDATED -------------------- */}
+        {/* -------------------- SERVICES (DESKTOP) -------------------- */}
         <section id="SERVICES" className="w-full h-screen grid grid-cols-3">
           {services.map((service, idx) => (
             <div
               key={idx}
               className="relative group cursor-pointer overflow-hidden h-screen"
             >
-              {/* Image only on hover */}
               <img
                 src={service.image}
                 alt={service.title}
@@ -242,7 +228,6 @@ const Home = () => {
                 draggable={false}
               />
 
-              {/* Soft wash only on hover */}
               <div
                 className="
                   absolute inset-0 bg-white
@@ -252,7 +237,6 @@ const Home = () => {
                 "
               />
 
-              {/* Content */}
               <div
                 className="
                   absolute inset-0 z-10 flex flex-col items-start justify-end p-8
@@ -297,7 +281,6 @@ const Home = () => {
           ))}
         </section>
 
-        {/* ✅ MOVED DOWN: WHAT WE BUILD now after SERVICES */}
         {/* ------------------- WHAT WE BUILD ------------------- */}
         <section
           id="WORK"
@@ -329,7 +312,7 @@ const Home = () => {
         </section>
 
         {/* ====================================================== */}
-        {/* STUDIO (DESKTOP) — RESTART: title never moves, item grows a bit on hover */}
+        {/* STUDIO (DESKTOP) — HOVER ACTIVATED, slow smooth title fade */}
         {/* ====================================================== */}
         <section
           id="STUDIO"
@@ -337,54 +320,66 @@ const Home = () => {
           style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
         >
           {studioItems.map((item, idx) => {
-            const active = activeStudio === idx;
+            const open = activeStudio === idx;
 
             return (
               <div
                 key={item.title}
                 onMouseEnter={() => setActiveStudio(idx)}
                 onMouseLeave={() => setActiveStudio(null)}
+                onFocus={() => setActiveStudio(idx)}
+                onBlur={() => setActiveStudio(null)}
+                tabIndex={0}
                 className={[
-                  'relative w-full cursor-pointer select-none overflow-hidden',
-                  'bg-white hover:bg-neutral-200',
+                  'relative w-full select-none overflow-hidden',
+                  open ? 'bg-neutral-200' : 'bg-white hover:bg-neutral-200',
                   'transition-[min-height,background-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
-                  active ? 'min-h-[46vh]' : 'min-h-[36vh]',
+                  // minimal expansion
+                  open ? 'min-h-[34vh]' : 'min-h-[30vh]',
+                  'outline-none',
                 ].join(' ')}
               >
-                {/* TITLE — perfectly centered, never moves */}
+                {/* TITLE — centered, disappears (slower + smoother) */}
                 <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
                   <div
-                    className="uppercase font-normal text-[clamp(2.5rem,8vw,7rem)] leading-[0.9]"
+                    className={[
+                      'uppercase font-normal text-[clamp(2.5rem,8vw,7rem)] leading-[0.9]',
+                      'transition-[opacity,transform,filter] duration-[1200ms] ease-[cubic-bezier(0.16,1,0.3,1)]',
+                      open
+                        ? 'opacity-0 scale-[0.985] blur-[1px]'
+                        : 'opacity-100 scale-100 blur-0',
+                    ].join(' ')}
                     style={{ letterSpacing: '-0.03em' }}
                   >
                     {item.title}
                   </div>
                 </div>
 
-                {/* TEXT — anchored lower; when the block grows, it naturally drops */}
-                <div
-                  className={[
-                    'absolute left-0 right-0 bottom-[10%] mx-auto',
-                    'grid transition-[grid-template-rows,opacity] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
-                    active
-                      ? 'grid-rows-[1fr] opacity-100'
-                      : 'grid-rows-[0fr] opacity-0',
-                  ].join(' ')}
-                >
-                  <div className="min-h-0 overflow-hidden">
-                    <RandomWordReveal
-                      text={item.description}
-                      active={active}
-                      durationMs={1400}
-                      className="uppercase font-light mx-auto text-center"
-                      style={{
-                        fontFamily: 'var(--font-neue-haas-light)',
-                        lineHeight: 1.5,
-                        maxWidth: '72ch',
-                        fontSize: '1rem',
-                        opacity: 0.92,
-                      }}
-                    />
+                {/* TEXT — centered */}
+                <div className="absolute inset-0 flex items-center justify-center px-10">
+                  <div
+                    className={[
+                      'grid w-full transition-[grid-template-rows,opacity,transform] duration-[1100ms] ease-[cubic-bezier(0.16,1,0.3,1)]',
+                      open
+                        ? 'grid-rows-[1fr] opacity-100 translate-y-0'
+                        : 'grid-rows-[0fr] opacity-0 translate-y-[6px]',
+                    ].join(' ')}
+                  >
+                    <div className="min-h-0 overflow-hidden">
+                      <RandomWordReveal
+                        text={item.description}
+                        active={open}
+                        durationMs={1750}
+                        className="uppercase font-light mx-auto text-center"
+                        style={{
+                          fontFamily: 'var(--font-neue-haas-light)',
+                          lineHeight: 1.6,
+                          maxWidth: '78ch',
+                          fontSize: '0.98rem',
+                          opacity: 0.92,
+                        }}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -398,6 +393,7 @@ const Home = () => {
 
       {/* ====================================================== */}
       {/* MOBILE VERSION */}
+      {/* ====================================================== */}
       <div className="block md:hidden">
         <section
           id="HOME"
@@ -424,7 +420,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* ✅ MOVED: SERVICES now right after HERO (MOBILE) */}
         {/* -------------------- SERVICES (MOBILE) — SCROLL REVEAL -------------------- */}
         <section id="SERVICES" className="w-full">
           {services.map((service, idx) => {
@@ -439,7 +434,6 @@ const Home = () => {
                 />
 
                 <div className="sticky top-0 h-[100dvh] w-full overflow-hidden">
-                  {/* Image reveal */}
                   <motion.img
                     src={service.image}
                     alt={service.title}
@@ -453,7 +447,6 @@ const Home = () => {
                     }}
                   />
 
-                  {/* Soft wash */}
                   <motion.div
                     className="absolute inset-0 bg-white"
                     initial={{ opacity: 0 }}
@@ -464,7 +457,6 @@ const Home = () => {
                     }}
                   />
 
-                  {/* Content (no reflow = no “up then down”) */}
                   <div className="absolute inset-0 z-10 flex flex-col justify-end px-6 pb-10">
                     <motion.h3
                       className="uppercase text-[28px] font-normal"
@@ -540,7 +532,6 @@ const Home = () => {
           id="WORK"
           className="px-4 pt-6 pb-10 h-[100svh] flex flex-col justify-between"
         >
-          {/* TITLE — más grande y arriba */}
           <h2
             className="uppercase leading-[0.95]"
             style={{
@@ -553,7 +544,6 @@ const Home = () => {
             BUILDING
           </h2>
 
-          {/* TEXT — más grande y hasta abajo */}
           <p
             className="uppercase font-light"
             style={{
@@ -569,7 +559,7 @@ const Home = () => {
         </section>
 
         {/* ====================================================== */}
-        {/* STUDIO (MOBILE) */}
+        {/* STUDIO (MOBILE) — TAP ONLY, hint text changes */}
         {/* ====================================================== */}
         <section
           id="STUDIO"
@@ -594,14 +584,14 @@ const Home = () => {
                     ].join(' ')}
                     style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
                   >
-                    <div className="relative px-7 h-[50svh] text-center">
-                      {/* TITLE — sube al abrir */}
+                    <div className="relative px-7 h-[44svh] text-center">
+                      {/* TITLE */}
                       <div className="absolute inset-0 flex items-center justify-center">
                         <div
                           className={`
-                            uppercase text-[clamp(2.5rem,8vw,7rem)] leading-[0.9]
-                            transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-                            ${open ? '-translate-y-6' : 'translate-y-0'}
+                            uppercase text-[clamp(2.4rem,8vw,6.2rem)] leading-[0.9]
+                            transition-[opacity,transform,filter] duration-[1150ms] ease-[cubic-bezier(0.16,1,0.3,1)]
+                            ${open ? 'opacity-0 scale-[0.985] blur-[1px]' : 'opacity-100 scale-100 blur-0'}
                           `}
                           style={{ letterSpacing: '-0.03em' }}
                         >
@@ -609,49 +599,44 @@ const Home = () => {
                         </div>
                       </div>
 
-                      {/* TAP LABEL — sube JUNTO con el título */}
-                      <div
-                        className={`
-                          absolute left-0 right-0 bottom-[22%]
-                          uppercase tracking-widest text-[11px]
-                          transition-transform transition-opacity duration-700
-                          ease-[cubic-bezier(0.22,1,0.36,1)]
-                          ${open ? '-translate-y-4 opacity-90' : 'translate-y-0 opacity-70'}
-                        `}
-                        style={{ fontFamily: 'var(--font-neue-haas-light)' }}
-                      >
-                        {open ? 'TAP TO HIDE' : 'TAP TO REVEAL'}
-                      </div>
-
-                      {/* TEXT — random word reveal (no bottom-to-top movement) */}
-                      <div className="absolute left-0 right-0 bottom-[6%] mx-auto">
+                      {/* TEXT */}
+                      <div className="absolute inset-0 flex items-center justify-center">
                         <div
                           className={`
-                            grid transition-[grid-template-rows,opacity]
-                            duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]
-                            ${
-                              open
-                                ? 'grid-rows-[1fr] opacity-100'
-                                : 'grid-rows-[0fr] opacity-0'
-                            }
+                            grid w-full transition-[grid-template-rows,opacity,transform]
+                            duration-[1050ms] ease-[cubic-bezier(0.16,1,0.3,1)]
+                            ${open ? 'grid-rows-[1fr] opacity-100 translate-y-0' : 'grid-rows-[0fr] opacity-0 translate-y-[6px]'}
                           `}
                         >
                           <div className="min-h-0 overflow-hidden">
                             <RandomWordReveal
                               text={item.description}
                               active={open}
-                              durationMs={1400}
-                              className="uppercase font-light mx-auto"
+                              durationMs={1850}
+                              className="uppercase font-light mx-auto text-center"
                               style={{
                                 fontFamily: 'var(--font-neue-haas-light)',
-                                lineHeight: 1.55,
+                                lineHeight: 1.65,
                                 fontSize: '13px',
-                                maxWidth: '46ch',
+                                maxWidth: '48ch',
                                 opacity: 0.92,
                               }}
                             />
                           </div>
                         </div>
+                      </div>
+
+                      {/* Hint — changes depending on state */}
+                      <div
+                        className={`
+                          absolute left-0 right-0 bottom-[9%]
+                          uppercase tracking-widest text-[11px]
+                          transition-opacity duration-400
+                          ${open ? 'opacity-80' : 'opacity-70'}
+                        `}
+                        style={{ fontFamily: 'var(--font-neue-haas-light)' }}
+                      >
+                        {open ? 'TAP TO HIDE' : 'TAP TO REVEAL'}
                       </div>
                     </div>
                   </button>
