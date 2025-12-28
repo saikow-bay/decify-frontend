@@ -3,6 +3,7 @@ import WhatWeDoSection from './WhatWeDoSection';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer';
 import { motion, useInView } from 'framer-motion';
+import HomeHero from './HomeHero';
 
 const services = [
   {
@@ -183,31 +184,13 @@ const Home = () => {
       {/* DESKTOP VERSION */}
       {/* ====================================================== */}
       <div className="hidden md:block">
-        {/* ---------------------- HERO ---------------------- */}
-        <section
-          id="HOME"
-          className="relative w-full h-[100dvh] flex items-center justify-center overflow-hidden px-6 md:px-24"
-          style={{
-            fontFamily: 'var(--font-neue-haas-normal)',
-            letterSpacing: '-0.03em',
-          }}
-        >
-          <div className="w-full flex flex-col items-center justify-center text-center">
-            <h1 className="uppercase text-[clamp(7.5rem,11vw,11.5rem)] font-normal leading-[0.98]">
-              <span className="block mb-4">WE</span>
-
-              <span
-                className={`inline-block ${
-                  isFading ? 'opacity-0' : 'opacity-100'
-                } transition-opacity duration-500`}
-              >
-                {titles[currentTitle].toUpperCase()}
-              </span>
-
-              <span className="block mt-4">BIG</span>
-            </h1>
-          </div>
-        </section>
+        {/* HERO (separado) */}
+        <HomeHero
+          variant="desktop"
+          titles={titles}
+          currentTitle={currentTitle}
+          isFading={isFading}
+        />
 
         {/* -------------------- SERVICES (DESKTOP) -------------------- */}
         <section id="SERVICES" className="w-full h-screen grid grid-cols-3">
@@ -334,7 +317,6 @@ const Home = () => {
                   'relative w-full select-none overflow-hidden',
                   open ? 'bg-neutral-200' : 'bg-white hover:bg-neutral-200',
                   'transition-[min-height,background-color] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]',
-                  // minimal expansion
                   open ? 'min-h-[34vh]' : 'min-h-[30vh]',
                   'outline-none',
                 ].join(' ')}
@@ -395,30 +377,13 @@ const Home = () => {
       {/* MOBILE VERSION */}
       {/* ====================================================== */}
       <div className="block md:hidden">
-        <section
-          id="HOME"
-          className="w-full h-[100dvh] px-6 flex items-center justify-center"
-          style={{
-            fontFamily: 'var(--font-neue-haas-normal)',
-            letterSpacing: '-0.03em',
-          }}
-        >
-          <div className="w-full text-center">
-            <h1 className="uppercase text-[clamp(5.2rem,20vw,7.8rem)] font-normal leading-[1.05]">
-              WE
-              <br />
-              <span
-                className={`inline-block ${
-                  isFading ? 'opacity-0' : 'opacity-100'
-                } transition-opacity duration-500`}
-              >
-                {titles[currentTitle].toUpperCase()}
-              </span>
-              <br />
-              BIG
-            </h1>
-          </div>
-        </section>
+        {/* HERO (separado) */}
+        <HomeHero
+          variant="mobile"
+          titles={titles}
+          currentTitle={currentTitle}
+          isFading={isFading}
+        />
 
         {/* -------------------- SERVICES (MOBILE) — SCROLL REVEAL -------------------- */}
         <section id="SERVICES" className="w-full">
@@ -591,7 +556,11 @@ const Home = () => {
                           className={`
                             uppercase text-[clamp(2.4rem,8vw,6.2rem)] leading-[0.9]
                             transition-[opacity,transform,filter] duration-[1150ms] ease-[cubic-bezier(0.16,1,0.3,1)]
-                            ${open ? 'opacity-0 scale-[0.985] blur-[1px]' : 'opacity-100 scale-100 blur-0'}
+                            ${
+                              open
+                                ? 'opacity-0 scale-[0.985] blur-[1px]'
+                                : 'opacity-100 scale-100 blur-0'
+                            }
                           `}
                           style={{ letterSpacing: '-0.03em' }}
                         >
@@ -605,7 +574,11 @@ const Home = () => {
                           className={`
                             grid w-full transition-[grid-template-rows,opacity,transform]
                             duration-[1050ms] ease-[cubic-bezier(0.16,1,0.3,1)]
-                            ${open ? 'grid-rows-[1fr] opacity-100 translate-y-0' : 'grid-rows-[0fr] opacity-0 translate-y-[6px]'}
+                            ${
+                              open
+                                ? 'grid-rows-[1fr] opacity-100 translate-y-0'
+                                : 'grid-rows-[0fr] opacity-0 translate-y-[6px]'
+                            }
                           `}
                         >
                           <div className="min-h-0 overflow-hidden">
