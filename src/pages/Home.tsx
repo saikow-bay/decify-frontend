@@ -31,7 +31,7 @@ const studioItems = [
   {
     title: 'DESIGN',
     description:
-      'WE DESIGN SYSTEMS, NOT SCREENS. TYPOGRAPHY, SPACING AND RHYTHM ARE TREATED LIKE ARCHITECTURE. EVERY BLOCK HAS PURPOSE, EVERY LINE HAS WEIGHT, AND EVERY DETAIL SUPPORTS THE BRAND ÃÂ¢ÃÂÃÂ SO IT FEELS EXPENSIVE WITHOUT TRYING.',
+      'WE DESIGN SYSTEMS, NOT SCREENS. TYPOGRAPHY, SPACING AND RHYTHM ARE TREATED LIKE ARCHITECTURE. EVERY BLOCK HAS PURPOSE, EVERY LINE HAS WEIGHT, AND EVERY DETAIL SUPPORTS THE BRAND — SO IT FEELS EXPENSIVE WITHOUT TRYING.',
   },
   {
     title: 'LOGIC',
@@ -41,12 +41,12 @@ const studioItems = [
   {
     title: 'PRECISION',
     description:
-      'MICRO-DETAILS ARE NOT OPTIONAL: SPACING, TIMING, TYPE SCALE, ALIGNMENT, AND CONSISTENCY ACROSS BREAKPOINTS. WE TUNE THE EXPERIENCE UNTIL IT FEELS QUIETLY PERFECT ÃÂ¢ÃÂÃÂ THE KIND OF POLISH YOU NOTICE WITHOUT REALIZING WHY.',
+      'MICRO-DETAILS ARE NOT OPTIONAL: SPACING, TIMING, TYPE SCALE, ALIGNMENT, AND CONSISTENCY ACROSS BREAKPOINTS. WE TUNE THE EXPERIENCE UNTIL IT FEELS QUIETLY PERFECT — THE KIND OF POLISH YOU NOTICE WITHOUT REALIZING WHY.',
   },
   {
     title: 'IMPACT',
     description:
-      'PERFORMANCE, CLARITY AND LONGEVITY. WE OPTIMIZE FOR SPEED, ACCESSIBILITY AND REAL-WORLD USAGE. SO THE PRODUCT DOESNÃÂ¢ÃÂÃÂT JUST LOOK GOOD TODAY ÃÂ¢ÃÂÃÂ IT HOLDS UP UNDER TRAFFIC, CONTENT CHANGES, AND GROWTH TOMORROW.',
+      "PERFORMANCE, CLARITY AND LONGEVITY. WE OPTIMIZE FOR SPEED, ACCESSIBILITY AND REAL-WORLD USAGE. SO THE PRODUCT DOESN'T JUST LOOK GOOD TODAY — IT HOLDS UP UNDER TRAFFIC, CONTENT CHANGES, AND GROWTH TOMORROW.",
   },
 ];
 
@@ -158,7 +158,7 @@ const Home = () => {
   // STUDIO state
   const [activeStudio, setActiveStudio] = useState<number | null>(null);
 
-  // ÃÂ¢ÃÂÃÂ SERVICES (MOBILE) ÃÂ¢ÃÂÃÂ Scroll-to-reveal
+  // ✅ SERVICES (MOBILE) — Scroll-to-reveal
   const trig0 = useRef<HTMLDivElement | null>(null);
   const trig1 = useRef<HTMLDivElement | null>(null);
   const trig2 = useRef<HTMLDivElement | null>(null);
@@ -275,7 +275,7 @@ const Home = () => {
               className="text-[7.5rem] font-normal leading-[0.98] uppercase"
               style={{ letterSpacing: '-0.04em', textAlign: 'left' }}
             >
-              WHAT WEÂ´RE <br />
+              WHAT WE'RE <br />
               <span className="text-yellow-300">BUILDING</span>
             </h2>
           </div>
@@ -295,7 +295,7 @@ const Home = () => {
         </section>
 
         {/* ====================================================== */}
-        {/* STUDIO (DESKTOP) ÃÂ¢ÃÂÃÂ HOVER ACTIVATED, slow smooth title fade */}
+        {/* STUDIO (DESKTOP) — HOVER ACTIVATED, slow smooth title fade */}
         {/* ====================================================== */}
         <section
           id="STUDIO"
@@ -321,7 +321,7 @@ const Home = () => {
                   'outline-none',
                 ].join(' ')}
               >
-                {/* TITLE ÃÂ¢ÃÂÃÂ centered, disappears (slower + smoother) */}
+                {/* TITLE — centered, disappears (slower + smoother) */}
                 <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
                   <div
                     className={[
@@ -337,7 +337,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                {/* TEXT ÃÂ¢ÃÂÃÂ centered */}
+                {/* TEXT — centered */}
                 <div className="absolute inset-0 flex items-center justify-center px-10">
                   <div
                     className={[
@@ -385,7 +385,7 @@ const Home = () => {
           isFading={isFading}
         />
 
-        {/* -------------------- SERVICES (MOBILE) ÃÂ¢ÃÂÃÂ SCROLL REVEAL -------------------- */}
+        {/* -------------------- SERVICES (MOBILE) — SCROLL REVEAL -------------------- */}
         <section id="SERVICES" className="w-full">
           {services.map((service, idx) => {
             const open = opens[idx];
@@ -504,7 +504,7 @@ const Home = () => {
               letterSpacing: '-0.04em',
             }}
           >
-            WHAT WEÂ´RE
+            WHAT WE'RE
             <br />
             <span className="text-yellow-300">BUILDING</span>
           </h2>
@@ -524,7 +524,7 @@ const Home = () => {
         </section>
 
         {/* ====================================================== */}
-        {/* STUDIO (MOBILE) ÃÂ¢ÃÂÃÂ TAP ONLY, hint text changes */}
+        {/* STUDIO (MOBILE) — TAP ONLY, hint text changes */}
         {/* ====================================================== */}
         <section
           id="STUDIO"
@@ -599,7 +599,7 @@ const Home = () => {
                         </div>
                       </div>
 
-                      {/* Hint ÃÂ¢ÃÂÃÂ changes depending on state */}
+                      {/* Hint — changes depending on state */}
                       <div
                         className={`
                           absolute left-0 right-0 bottom-[9%]
