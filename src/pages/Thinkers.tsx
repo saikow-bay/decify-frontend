@@ -36,7 +36,7 @@ const Thinkers = () => {
   const rotateDirection = useTransform(scrollYProgress, [0, 1], ['0deg', '-8deg']);
 
   // One single intense color for all words
-  const themeColor = '#2A2A2A';
+  const themeColor = '#27261B';
 
 
   return (

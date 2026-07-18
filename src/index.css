@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ============================= */
-/* FONTS — NEUE HAAS DISPLAY */
+/* FONTS â NEUE HAAS DISPLAY */
 /* ============================= */
 
 @font-face {
@@ -54,6 +54,14 @@
   font-display: swap;
 }
 
+:root {
+  --color-brand: #27261B;
+  --color-accent: #FCEC81;
+  --color-text: #27261B;
+  --color-background: #FBFBFB;
+  --color-surface: #F2F2F0;
+}
+
 /* ============================= */
 /* GLOBAL RESET */
 /* ============================= */
@@ -65,6 +73,8 @@ body {
   margin: 0;
   padding: 0;
   scroll-behavior: smooth;
+  background-color: var(--color-background);
+  color: var(--color-text);
 
   /* elimina rebote / scroll raro */
   overscroll-behavior: none;
