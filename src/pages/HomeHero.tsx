@@ -21,9 +21,9 @@ const HomeHero: React.FC<HomeHeroProps> = ({
         style={{
           fontFamily: 'var(--font-neue-haas-normal)',
           letterSpacing: '-0.03em',
-          // ✅ stronger blue gradient, bottom MUST be white
+          // â stronger blue gradient, bottom MUST be white
           background:
-            'linear-gradient(180deg, #D6DEFF 0%, #EEF2FF 45%, #FFFFFF 75%, #FFFFFF 100%)',
+            'linear-gradient(180deg, #FCEC81 0%, #FBFBFB 75%, #FBFBFB 100%)',
         }}
       >
         <div className="w-full flex flex-col items-center justify-center text-center">
@@ -53,8 +53,8 @@ const HomeHero: React.FC<HomeHeroProps> = ({
       style={{
         fontFamily: 'var(--font-neue-haas-normal)',
         letterSpacing: '-0.03em',
-        // ✅ gradient, bottom MUST be white
-        background: 'linear-gradient(180deg, #D6DEFF 0%, #EEF2FF 30%, #FFFFFF 60%, #FFFFFF 100%)',
+        // â gradient, bottom MUST be white
+        background: 'linear-gradient(180deg, #FCEC81 0%, #FBFBFB 60%, #FBFBFB 100%)',
       }}
     >
       <div className="w-full text-center">
