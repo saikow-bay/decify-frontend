@@ -21,14 +21,20 @@ const HomeHero: React.FC<HomeHeroProps> = ({
         style={{
           fontFamily: 'var(--font-neue-haas-normal)',
           letterSpacing: '-0.03em',
-          // â stronger blue gradient, bottom MUST be white
+          // Ã¢ÂÂ stronger blue gradient, bottom MUST be white
           background:
             'linear-gradient(180deg, #FCEC81 0%, #FBFBFB 75%, #FBFBFB 100%)',
         }}
       >
         <div className="w-full flex flex-col items-center justify-center text-center">
+          <p
+            className="uppercase font-light mb-8 text-lg tracking-widest"
+            style={{ fontFamily: 'var(--font-neue-haas-light)' }}
+          >
+            FIXED-SCOPE WEBSITES + LIGHTWEIGHT WEB APPS
+          </p>
           <h1 className="uppercase text-[clamp(7.5rem,11vw,11.5rem)] font-normal leading-[0.98]">
-            <span className="block mb-4">WE</span>
+            <span className="block mb-4">GET</span>
 
             <span
               className={`inline-block ${
@@ -38,7 +44,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({
               {titles[currentTitle].toUpperCase()}
             </span>
 
-            <span className="block mt-4">BIG</span>
+            <span className="block mt-4">FLOWING</span>
           </h1>
         </div>
       </section>
@@ -53,13 +59,19 @@ const HomeHero: React.FC<HomeHeroProps> = ({
       style={{
         fontFamily: 'var(--font-neue-haas-normal)',
         letterSpacing: '-0.03em',
-        // â gradient, bottom MUST be white
+        // Ã¢ÂÂ gradient, bottom MUST be white
         background: 'linear-gradient(180deg, #FCEC81 0%, #FBFBFB 60%, #FBFBFB 100%)',
       }}
     >
       <div className="w-full text-center">
+        <p
+          className="uppercase font-light mb-6 text-xs tracking-widest"
+          style={{ fontFamily: 'var(--font-neue-haas-light)' }}
+        >
+          FIXED-SCOPE WEBSITES + LIGHTWEIGHT WEB APPS
+        </p>
       <h1 className="uppercase text-[clamp(5.6rem,22vw,8.4rem)] font-normal leading-[1]">
-          WE
+          GET
           <br />
           <span
             className={`inline-block ${
@@ -69,7 +81,7 @@ const HomeHero: React.FC<HomeHeroProps> = ({
             {titles[currentTitle].toUpperCase()}
           </span>
           <br />
-          BIG
+          FLOWING
         </h1>
       </div>
     </section>
