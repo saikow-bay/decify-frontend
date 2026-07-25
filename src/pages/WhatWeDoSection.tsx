@@ -7,7 +7,7 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
     {
       label: 'LEADS',
       description:
-        'WE BUILD CLEAR PATHS FOR SERVICE BUYERS TO TAKE ACTIONâFROM STRONG OFFERS TO CONTACT FORMS, QUOTE REQUESTS AND BOOKING FLOWS.',
+        'WE BUILD CLEAR PATHS FOR SERVICE BUYERS TO TAKE ACTION—FROM STRONG OFFERS TO CONTACT FORMS, QUOTE REQUESTS AND BOOKING FLOWS.',
     },
     {
       label: 'INTEGRATIONS',
@@ -113,7 +113,7 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
               onTouchStart={() => setActiveIndex(idx)}
               className="grid md:grid-cols-12 items-center group cursor-pointer"
             >
-              {/* TÃTULO */}
+              {/* TÍTULO */}
               <div
                 className="col-span-5 text-[clamp(2.5rem,7vw,6rem)] uppercase tracking-tight font-normal leading-[1.1]"
                 style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
@@ -133,7 +133,7 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
                 </span>
               </div>
 
-              {/* LÃNEA */}
+              {/* LÍNEA */}
               <div className="col-span-2 hidden md:flex justify-center">
                 {activeIndex === idx && (
                   <div
@@ -144,7 +144,7 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
                 )}
               </div>
 
-              {/* DESCRIPCIÃN */}
+              {/* DESCRIPCIÓN */}
               <div className="col-span-5 pl-12">
                 <div
                   className={`transition-all duration-700 transform ${

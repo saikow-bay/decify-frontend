@@ -158,7 +158,7 @@ const Home = () => {
   // STUDIO state
   const [activeStudio, setActiveStudio] = useState<number | null>(null);
 
-  // â SERVICES (MOBILE) â Scroll-to-reveal
+  // ✅ SERVICES (MOBILE) — Scroll-to-reveal
   const trig0 = useRef<HTMLDivElement | null>(null);
   const trig1 = useRef<HTMLDivElement | null>(null);
   const trig2 = useRef<HTMLDivElement | null>(null);
@@ -296,7 +296,7 @@ const Home = () => {
         </section>
 
         {/* ====================================================== */}
-        {/* STUDIO (DESKTOP) â HOVER ACTIVATED, slow smooth title fade */}
+        {/* STUDIO (DESKTOP) — HOVER ACTIVATED, slow smooth title fade */}
         {/* ====================================================== */}
         <section
           id="STUDIO"
@@ -322,7 +322,7 @@ const Home = () => {
                   'outline-none',
                 ].join(' ')}
               >
-                {/* TITLE â centered, disappears (slower + smoother) */}
+                {/* TITLE — centered, disappears (slower + smoother) */}
                 <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
                   <div
                     className={[
@@ -338,7 +338,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                {/* TEXT â centered */}
+                {/* TEXT — centered */}
                 <div className="absolute inset-0 flex items-center justify-center px-10">
                   <div
                     className={[
@@ -386,7 +386,7 @@ const Home = () => {
           isFading={isFading}
         />
 
-        {/* -------------------- SERVICES (MOBILE) â SCROLL REVEAL -------------------- */}
+        {/* -------------------- SERVICES (MOBILE) — SCROLL REVEAL -------------------- */}
         <section id="SERVICES" className="w-full">
           {services.map((service, idx) => {
             const open = opens[idx];
@@ -526,7 +526,7 @@ const Home = () => {
         </section>
 
         {/* ====================================================== */}
-        {/* STUDIO (MOBILE) â TAP ONLY, hint text changes */}
+        {/* STUDIO (MOBILE) — TAP ONLY, hint text changes */}
         {/* ====================================================== */}
         <section
           id="STUDIO"
@@ -601,7 +601,7 @@ const Home = () => {
                         </div>
                       </div>
 
-                      {/* Hint â changes depending on state */}
+                      {/* Hint — changes depending on state */}
                       <div
                         className={`
                           absolute left-0 right-0 bottom-[9%]
