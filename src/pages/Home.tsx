@@ -8,45 +8,45 @@ import HomeHero from './HomeHero';
 const services = [
   {
     image: '/images/uiux.jpg',
-    title: 'DECIFY CORE',
+    title: 'FIXED-SCOPE WEBSITES',
     description:
-      'Professional, brand-aligned website design using your logo, fonts, colors and imagery, with a clear and intentional structure.',
+      'Launch-ready websites for quote-driven service businesses, built around clear offers, proof, lead capture, booking paths and quote requests.',
   },
   {
     image: '/images/frontend.png',
-    title: 'DECIFY PRO',
+    title: 'LIGHTWEIGHT WEB APPS',
     description:
-      'Everything from CORE + advanced catalog, filters, admin panel, product editing, SEO and performance upgrades.',
+      'Custom portals, calculators, dashboards and workflow tools that help teams qualify inquiries, manage bookings and move faster.',
   },
   {
     image: '/images/one.png',
-    title: 'DECIFY ONE',
+    title: 'CRM + TOOL INTEGRATIONS',
     description:
-      'Includes everything from PRO + full visual identity, campaign landing pages, blog/editorial section, email automations, cart recovery, advanced API integrations, premium optimization.',
+      'Connect forms, quote requests, calendars, CRMs, email automations and operations tools so every lead lands in the right place.',
   },
 ];
 
 // STUDIO (longer text)
 const studioItems = [
   {
-    title: 'DESIGN',
+    title: 'PROCESS',
     description:
-      'WE DESIGN SYSTEMS, NOT SCREENS. TYPOGRAPHY, SPACING AND RHYTHM ARE TREATED LIKE ARCHITECTURE. EVERY BLOCK HAS PURPOSE, EVERY LINE HAS WEIGHT, AND EVERY DETAIL SUPPORTS THE BRAND — SO IT FEELS EXPENSIVE WITHOUT TRYING.',
+      'WE START WITH THE SERVICE, THE CUSTOMER JOURNEY AND THE QUOTE PATH. SCOPE, PAGES, FEATURES AND INTEGRATIONS ARE DEFINED UP FRONT SO EVERY BUILD HAS A CLEAR PLAN, A CLEAR TIMELINE AND A CLEAR OUTCOME.',
   },
   {
-    title: 'LOGIC',
+    title: 'CONVERSION',
     description:
-      'WE BUILD STRUCTURE BEFORE STYLE. NAVIGATION, FLOW AND INFORMATION ARCHITECTURE ARE PLANNED LIKE A PRODUCT, NOT A POSTER. THE RESULT IS CLARITY: USERS KNOW WHERE THEY ARE, WHAT TO DO NEXT, AND WHY IT MATTERS.',
+      'WE DESIGN AROUND LEADS, BOOKINGS AND QUOTE REQUESTS. OFFERS ARE SHARP, FORMS ARE INTENTIONAL, CALLS TO ACTION ARE OBVIOUS, AND EVERY PAGE HELPS A VISITOR TAKE THE NEXT STEP WITH CONFIDENCE.',
   },
   {
-    title: 'PRECISION',
+    title: 'SYSTEMS',
     description:
-      'MICRO-DETAILS ARE NOT OPTIONAL: SPACING, TIMING, TYPE SCALE, ALIGNMENT, AND CONSISTENCY ACROSS BREAKPOINTS. WE TUNE THE EXPERIENCE UNTIL IT FEELS QUIETLY PERFECT — THE KIND OF POLISH YOU NOTICE WITHOUT REALIZING WHY.',
+      'WE CONNECT THE WEBSITE TO THE TOOLS THAT RUN THE BUSINESS. CRM HANDOFFS, CALENDAR FLOWS, EMAIL NOTIFICATIONS, AUTOMATIONS AND INTERNAL WORKFLOWS ARE BUILT TO REDUCE MANUAL FOLLOW-UP.',
   },
   {
-    title: 'IMPACT',
+    title: 'DELIVERY',
     description:
-      "PERFORMANCE, CLARITY AND LONGEVITY. WE OPTIMIZE FOR SPEED, ACCESSIBILITY AND REAL-WORLD USAGE. SO THE PRODUCT DOESN'T JUST LOOK GOOD TODAY — IT HOLDS UP UNDER TRAFFIC, CONTENT CHANGES, AND GROWTH TOMORROW.",
+      'WE BUILD WITH REPEATABLE STRUCTURE, NOT OPEN-ENDED CHAOS. FIXED-SCOPE PACKAGES, PROVEN COMPONENTS AND PRACTICAL QA HELP SERVICE BUSINESSES LAUNCH CLEANLY, MEASURE RESULTS AND IMPROVE OVER TIME.',
   },
 ];
 
@@ -141,7 +141,7 @@ const Home = () => {
   const [currentTitle, setCurrentTitle] = useState(0);
   const [isFading, setIsFading] = useState(false);
 
-  const titles = ['DECIFY', 'CREATE', 'INNOVATE', 'GROW'];
+  const titles = ['LEADS', 'BOOKINGS', 'QUOTES', 'SYSTEMS'];
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -158,7 +158,7 @@ const Home = () => {
   // STUDIO state
   const [activeStudio, setActiveStudio] = useState<number | null>(null);
 
-  // ✅ SERVICES (MOBILE) — Scroll-to-reveal
+  // â SERVICES (MOBILE) â Scroll-to-reveal
   const trig0 = useRef<HTMLDivElement | null>(null);
   const trig1 = useRef<HTMLDivElement | null>(null);
   const trig2 = useRef<HTMLDivElement | null>(null);
@@ -288,14 +288,15 @@ const Home = () => {
                 lineHeight: 1.2,
               }}
             >
-              DECIFY BUILDS MODERN, HIGH-END DIGITAL EXPERIENCES THAT COMBINE
-              ART, PERFORMANCE AND TECHNOLOGY DELIVERED WITH OBSESSIVE DETAIL.
+              DECIFY BUILDS FIXED-SCOPE WEBSITES AND LIGHTWEIGHT WEB APPS FOR
+              QUOTE-DRIVEN SERVICE BUSINESSES, FOCUSED ON LEADS, BOOKINGS,
+              QUOTE REQUESTS AND CONNECTED OPERATIONS.
             </p>
           </div>
         </section>
 
         {/* ====================================================== */}
-        {/* STUDIO (DESKTOP) — HOVER ACTIVATED, slow smooth title fade */}
+        {/* STUDIO (DESKTOP) â HOVER ACTIVATED, slow smooth title fade */}
         {/* ====================================================== */}
         <section
           id="STUDIO"
@@ -321,7 +322,7 @@ const Home = () => {
                   'outline-none',
                 ].join(' ')}
               >
-                {/* TITLE — centered, disappears (slower + smoother) */}
+                {/* TITLE â centered, disappears (slower + smoother) */}
                 <div className="absolute inset-0 flex items-center justify-center text-center pointer-events-none">
                   <div
                     className={[
@@ -337,7 +338,7 @@ const Home = () => {
                   </div>
                 </div>
 
-                {/* TEXT — centered */}
+                {/* TEXT â centered */}
                 <div className="absolute inset-0 flex items-center justify-center px-10">
                   <div
                     className={[
@@ -385,7 +386,7 @@ const Home = () => {
           isFading={isFading}
         />
 
-        {/* -------------------- SERVICES (MOBILE) — SCROLL REVEAL -------------------- */}
+        {/* -------------------- SERVICES (MOBILE) â SCROLL REVEAL -------------------- */}
         <section id="SERVICES" className="w-full">
           {services.map((service, idx) => {
             const open = opens[idx];
@@ -518,13 +519,14 @@ const Home = () => {
               maxWidth: '34ch',
             }}
           >
-            DECIFY BUILDS MODERN, HIGH-END DIGITAL EXPERIENCES THAT COMBINE ART,
-            PERFORMANCE AND TECHNOLOGY DELIVERED WITH OBSESSIVE DETAIL.
+            DECIFY BUILDS FIXED-SCOPE WEBSITES AND LIGHTWEIGHT WEB APPS FOR
+            QUOTE-DRIVEN SERVICE BUSINESSES, FOCUSED ON LEADS, BOOKINGS, QUOTE
+            REQUESTS AND CONNECTED OPERATIONS.
           </p>
         </section>
 
         {/* ====================================================== */}
-        {/* STUDIO (MOBILE) — TAP ONLY, hint text changes */}
+        {/* STUDIO (MOBILE) â TAP ONLY, hint text changes */}
         {/* ====================================================== */}
         <section
           id="STUDIO"
@@ -599,7 +601,7 @@ const Home = () => {
                         </div>
                       </div>
 
-                      {/* Hint — changes depending on state */}
+                      {/* Hint â changes depending on state */}
                       <div
                         className={`
                           absolute left-0 right-0 bottom-[9%]

@@ -5,19 +5,19 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
 
   const values = [
     {
-      label: 'ARTISTRY',
+      label: 'LEADS',
       description:
-        'WE APPROACH EVERY PROJECT AS A VISUAL COMPOSITION—CRAFTED WITH AESTHETIC DISCIPLINE.',
+        'WE BUILD CLEAR PATHS FOR SERVICE BUYERS TO TAKE ACTIONâFROM STRONG OFFERS TO CONTACT FORMS, QUOTE REQUESTS AND BOOKING FLOWS.',
     },
     {
-      label: 'PRECISION',
+      label: 'INTEGRATIONS',
       description:
-        'FROM PIXEL TO INTERACTION, WE OBSESS OVER EVERY LINE, TRANSITION AND FRAME.',
+        'WE CONNECT WEBSITES AND WEB APPS TO CRMS, CALENDARS, EMAIL TOOLS AND OPERATIONS SYSTEMS SO INQUIRIES MOVE WITHOUT FRICTION.',
     },
     {
-      label: 'OBSESSION',
+      label: 'DELIVERY',
       description:
-        'WE’RE RELENTLESSLY COMMITTED TO DETAIL. THAT’S WHERE THE MAGIC LIVES.',
+        'WE USE FIXED SCOPES, CLEAR PROCESS AND REPEATABLE SYSTEMS TO LAUNCH PRACTICAL DIGITAL TOOLS WITHOUT OPEN-ENDED CHAOS.',
     },
   ];
 
@@ -113,7 +113,7 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
               onTouchStart={() => setActiveIndex(idx)}
               className="grid md:grid-cols-12 items-center group cursor-pointer"
             >
-              {/* TÍTULO */}
+              {/* TÃTULO */}
               <div
                 className="col-span-5 text-[clamp(2.5rem,7vw,6rem)] uppercase tracking-tight font-normal leading-[1.1]"
                 style={{ fontFamily: 'var(--font-neue-haas-normal)' }}
@@ -133,7 +133,7 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
                 </span>
               </div>
 
-              {/* LÍNEA */}
+              {/* LÃNEA */}
               <div className="col-span-2 hidden md:flex justify-center">
                 {activeIndex === idx && (
                   <div
@@ -144,7 +144,7 @@ export default function ValuesSection({ isDark }: { isDark: boolean }) {
                 )}
               </div>
 
-              {/* DESCRIPCIÓN */}
+              {/* DESCRIPCIÃN */}
               <div className="col-span-5 pl-12">
                 <div
                   className={`transition-all duration-700 transform ${
