@@ -28,16 +28,13 @@ const Thinkers = () => {
     offset: ['start end', 'end start'],
   });
 
-  // Smooth rotations
   const rotateMinds = useTransform(scrollYProgress, [0, 1], ['0deg', '10deg']);
   const rotateThat = useTransform(scrollYProgress, [0, 1], ['0deg', '10deg']);
   const rotateShape = useTransform(scrollYProgress, [0, 1], ['0deg', '15deg']);
   const rotateOur = useTransform(scrollYProgress, [0, 1], ['0deg', '-15deg']);
   const rotateDirection = useTransform(scrollYProgress, [0, 1], ['0deg', '-8deg']);
 
-  // One single intense color for all words
   const themeColor = '#27261B';
-
 
   return (
     <motion.div
@@ -52,50 +49,50 @@ const Thinkers = () => {
       >
         <Navigation isDark={false} />
 
-        {/* HERO */}
         <section
           ref={heroRef}
           className="w-full min-h-screen relative px-8 md:px-24 overflow-hidden mt-[-10px]"
         >
           <motion.div
-  style={{ color: themeColor, rotate: rotateMinds }}
-  className="absolute top-[15%] left-[8%] text-[clamp(3rem,7vw,6rem)] uppercase"
->
-  "Minds"
-</motion.div>
+            style={{ color: themeColor, rotate: rotateMinds }}
+            className="absolute top-[15%] left-[8%] text-[clamp(3rem,7vw,6rem)] uppercase"
+          >
+            "Quote"
+          </motion.div>
 
-<motion.div
-  style={{ color: themeColor, rotate: rotateThat }}
-  className="absolute top-[45%] left-[25%] text-[clamp(3rem,7vw,6rem)] uppercase"
->
-  "That"
-</motion.div>
+          <motion.div
+            style={{ color: themeColor, rotate: rotateThat }}
+            className="absolute top-[45%] left-[25%] text-[clamp(3rem,7vw,6rem)] uppercase"
+          >
+            "Paths"
+          </motion.div>
 
-<motion.div
-  style={{ color: themeColor, rotate: rotateShape }}
-  className="absolute top-[25%] right-[10%] text-[clamp(3rem,7vw,6rem)] uppercase"
->
-  "Shape"
-</motion.div>
+          <motion.div
+            style={{ color: themeColor, rotate: rotateShape }}
+            className="absolute top-[25%] right-[10%] text-[clamp(3rem,7vw,6rem)] uppercase"
+          >
+            "Shape"
+          </motion.div>
 
-<motion.div
-  style={{ color: themeColor, rotate: rotateOur }}
-  className="absolute bottom-[30%] left-[18%] text-[clamp(3rem,7vw,6rem)] uppercase"
->
-  "Our"
-</motion.div>
+          <motion.div
+            style={{ color: themeColor, rotate: rotateOur }}
+            className="absolute bottom-[30%] left-[18%] text-[clamp(3rem,7vw,6rem)] uppercase"
+          >
+            "Commercial"
+          </motion.div>
 
-<motion.div
-  style={{ color: themeColor, rotate: rotateDirection }}
-  className="absolute bottom-[10%] right-[18%] text-[clamp(3rem,7vw,6rem)] uppercase"
->
-  "Direction"
-</motion.div>
-
+          <motion.div
+            style={{ color: themeColor, rotate: rotateDirection }}
+            className="absolute bottom-[10%] right-[18%] text-[clamp(3rem,7vw,6rem)] uppercase"
+          >
+            "Outcomes"
+          </motion.div>
         </section>
 
-        {/* COLLAGE SECTION */}
         <section className="relative w-full min-h-[300vh] px-8 md:px-24 py-24 grid grid-cols-12 gap-4">
+          <div className="col-span-12 md:col-span-7 max-w-3xl pb-16 uppercase text-base md:text-lg leading-relaxed">
+            Decify studies how quote-driven service businesses win trust, frame scope and turn visits into qualified requests. The references on this page support sharper offers, clearer proof and stronger conversion decisions across every build.
+          </div>
           <ParallaxImage
             src="/images/inspo1.jpg"
             className="col-span-12 h-[800px] object-cover transform rotate-2 mt-[-150px]"
